@@ -11,6 +11,7 @@ repository.workspace = true
 gateway-core.workspace          = true
 gateway-config.workspace        = true
 gateway-plugin.workspace        = true
+gateway-resolver.workspace      = true
 gateway-ksp.workspace           = true
 gateway-pipeline-http.workspace = true
 gateway-router.workspace        = true

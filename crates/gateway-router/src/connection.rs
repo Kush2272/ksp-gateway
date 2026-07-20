@@ -17,7 +17,7 @@ impl GatewayConnectionManager {
     }
 
     pub async fn acquire(&self, decision: &RouteDecision) -> GatewayResult<Arc<OriginClient>> {
-        Ok(self.pool.acquire(&decision.target))
+        self.pool.acquire(&decision.target)
     }
 
     pub fn pool_size(&self) -> usize {

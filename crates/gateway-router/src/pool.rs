@@ -1,27 +1,28 @@
-//! Per-origin connection pool using hyper's connection management.
+//! Per-origin connection pool backed by reqwest client pooling.
 
 use std::sync::Arc;
 use dashmap::DashMap;
+use reqwest::Client;
+use gateway_core::{error::{GatewayError, GatewayResult}, types::Authority};
 
-use gateway_core::types::Authority;
-
-/// A simple wrapper holding a hyper HTTPS client that can be reused across requests.
-///
-/// In the full implementation this will be a proper pooled connection manager.
-/// For Milestone 1 this provides a compilable skeleton.
+/// A client wrapper holding a pooled reqwest HTTP client.
 pub struct OriginClient {
     pub authority: Authority,
+    pub client:    Client,
 }
 
 impl OriginClient {
-    pub fn new(authority: Authority) -> Self {
-        Self { authority }
+    pub fn new(authority: Authority) -> GatewayResult<Self> {
+        let client = Client::builder()
+            .use_rustls_tls()
+            .build()
+            .map_err(|e| GatewayError::Internal(format!("Failed to create reqwest client: {e}")))?;
+
+        Ok(Self { authority, client })
     }
 }
 
 /// Per-origin pool of `OriginClient` instances.
-///
-/// DashMap provides lock-free concurrent access to the pool entries.
 pub struct ConnectionPool {
     pool: DashMap<String, Arc<OriginClient>>,
 }
@@ -31,15 +32,15 @@ impl ConnectionPool {
         Self { pool: DashMap::new() }
     }
 
-    /// Acquire a connection to `authority`, creating one if needed.
-    pub fn acquire(&self, authority: &Authority) -> Arc<OriginClient> {
+    /// Acquire a connection wrapper for `authority`, creating one if needed.
+    pub fn acquire(&self, authority: &Authority) -> GatewayResult<Arc<OriginClient>> {
         let key = authority.to_string();
         if let Some(client) = self.pool.get(&key) {
-            return Arc::clone(client.value());
+            return Ok(Arc::clone(client.value()));
         }
-        let client = Arc::new(OriginClient::new(authority.clone()));
+        let client = Arc::new(OriginClient::new(authority.clone())?);
         self.pool.insert(key, Arc::clone(&client));
-        client
+        Ok(client)
     }
 
     pub fn size(&self) -> usize {

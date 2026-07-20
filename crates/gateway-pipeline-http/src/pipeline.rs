@@ -8,11 +8,11 @@ use std::sync::Arc;
 use gateway_core::{
     error::GatewayResult,
     request::{NormalizedRequest, RequestContext},
-    response::NormalizedResponse,
+    response::{NormalizedResponse, ResponseContext},
     traits::RoutePlanner,
 };
 use gateway_plugin::PluginChain;
-use gateway_router::{DefaultRoutePlanner, GatewayConnectionManager};
+use gateway_router::{adapter::HttpAdapter, DefaultRoutePlanner, GatewayConnectionManager};
 
 pub struct HttpPipeline {
     plugin_chain: Arc<PluginChain>,
@@ -44,17 +44,16 @@ impl HttpPipeline {
         let decision = self.planner.plan(&req, &ctx).await?;
 
         // ── Connection acquisition ───────────────────────────────────────────
-        let _conn = self.conn_manager.acquire(&decision).await?;
+        let conn = self.conn_manager.acquire(&decision).await?;
 
-        // ── Protocol adapter (Milestone 3: full HTTP/hyper implementation) ───
-        let mut resp = NormalizedResponse::synthetic_error(
-            501,
-            "HTTP pipeline adapter not yet implemented (Milestone 3)",
-        );
+        // ── Protocol adapter ─────────────────────────────────────────────────
+        let start_time = std::time::Instant::now();
+        let mut adapter = HttpAdapter::new(conn);
+        let mut resp = adapter.send(req).await?;
+        let ttfb_ms = start_time.elapsed().as_secs_f64() * 1000.0;
 
         // ── Response-side plugin chain ───────────────────────────────────────
-        use gateway_core::response::ResponseContext;
-        let mut resp_ctx = ResponseContext::new(ctx.correlation_id, resp.status, 0.0);
+        let mut resp_ctx = ResponseContext::new(ctx.correlation_id, resp.status, ttfb_ms);
         self.plugin_chain.run_response(&mut resp_ctx, &mut resp).await?;
 
         Ok(resp)

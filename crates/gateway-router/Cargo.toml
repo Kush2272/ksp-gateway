@@ -26,3 +26,4 @@ dashmap.workspace          = true
 bytes.workspace            = true
 futures.workspace          = true
 pin-project.workspace      = true
+reqwest = { version = "0.13.4", features = ["rustls", "stream"] }
