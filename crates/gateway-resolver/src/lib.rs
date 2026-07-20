@@ -123,3 +123,6 @@ fn parse_custom_hosts(overrides: &[HostOverride]) -> GatewayResult<HashMap<Strin
     }
     Ok(map)
 }
+
+#[cfg(test)]
+mod tests;

@@ -14,3 +14,6 @@ pub mod router;
 
 pub use listener::KspListener;
 pub use session::SessionManager;
+
+#[cfg(test)]
+mod tests;
