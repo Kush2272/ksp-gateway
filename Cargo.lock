@@ -1265,14 +1265,20 @@ dependencies = [
 name = "gateway-tests"
 version = "0.1.0"
 dependencies = [
+ "bytes",
  "gateway-config",
  "gateway-core",
+ "gateway-dashboard",
  "gateway-ksp",
+ "gateway-monitor",
  "gateway-pipeline-http",
+ "gateway-pipeline-ws",
  "gateway-plugin",
  "gateway-resolver",
  "gateway-router",
+ "reqwest",
  "tokio",
+ "tokio-tungstenite",
  "tracing",
  "tracing-subscriber",
 ]

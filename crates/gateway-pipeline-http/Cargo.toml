@@ -20,9 +20,9 @@ hyper.workspace          = true
 hyper-util.workspace     = true
 http.workspace           = true
 http-body-util.workspace = true
+reqwest.workspace        = true
 bytes.workspace          = true
 futures.workspace        = true
 futures-util.workspace   = true
 async-compression.workspace = true
 pin-project.workspace    = true
-reqwest = { version = "0.13.4", features = ["rustls", "stream"] }
