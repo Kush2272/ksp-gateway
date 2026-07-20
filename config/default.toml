@@ -1,0 +1,48 @@
+# KSP Gateway — Default Configuration
+# All values shown are defaults; omit any field to use the default.
+
+[ksp]
+listen        = "0.0.0.0:8765"
+max_sessions  = 100_000
+session_ttl_secs = 300
+
+[router]
+max_redirects        = 10
+request_timeout_secs = 30
+
+[resolver]
+use_doh      = false
+doh_url      = "https://cloudflare-dns.com/dns-query"
+custom_hosts = []
+# Example:
+# [[resolver.custom_hosts]]
+# host = "example.ksp"
+# ip   = "127.0.0.1"
+
+[pipeline.http]
+enabled              = true
+pool_size            = 256
+request_timeout_secs = 30
+user_agent           = "KSP-Gateway/0.1.0"
+prefer_http2         = true
+
+[pipeline.ws]
+enabled          = true
+max_message_size = 67108864  # 64 MB
+
+[cache]
+enabled       = true
+max_memory_mb = 512
+# disk_path   = "./cache"
+
+[plugins]
+enabled = ["logging", "metrics", "headers", "compression", "cache", "rate-limit"]
+
+[monitor]
+prometheus_port = 9090
+dashboard       = true
+log_format      = "pretty"   # "pretty" | "json"
+log_level       = "info"     # "trace" | "debug" | "info" | "warn" | "error"
+
+[tls]
+verify_upstream = true

@@ -1,0 +1,27 @@
+[package]
+name        = "gateway-pipeline-http"
+description = "HTTP/1.1 and HTTP/2 pipeline for KSP Gateway"
+version.workspace    = true
+edition.workspace    = true
+license.workspace    = true
+authors.workspace    = true
+repository.workspace = true
+
+[dependencies]
+gateway-core.workspace   = true
+gateway-plugin.workspace = true
+gateway-router.workspace = true
+gateway-config.workspace = true
+async-trait.workspace    = true
+thiserror.workspace      = true
+tokio.workspace          = true
+tracing.workspace        = true
+hyper.workspace          = true
+hyper-util.workspace     = true
+http.workspace           = true
+http-body-util.workspace = true
+bytes.workspace          = true
+futures.workspace        = true
+futures-util.workspace   = true
+async-compression.workspace = true
+pin-project.workspace    = true

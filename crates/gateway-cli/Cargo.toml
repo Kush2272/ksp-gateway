@@ -1,0 +1,36 @@
+[package]
+name        = "gateway-cli"
+description = "KSP Gateway — command-line interface and process entrypoint"
+version.workspace    = true
+edition.workspace    = true
+license.workspace    = true
+authors.workspace    = true
+repository.workspace = true
+
+[[bin]]
+name = "ksp-gateway"
+path = "src/main.rs"
+
+[dependencies]
+gateway-core.workspace      = true
+gateway-config.workspace    = true
+gateway-plugin.workspace    = true
+gateway-resolver.workspace  = true
+gateway-router.workspace    = true
+gateway-pipeline-http.workspace = true
+gateway-pipeline-ws.workspace   = true
+gateway-ksp.workspace       = true
+gateway-cache.workspace     = true
+gateway-monitor.workspace   = true
+gateway-dashboard.workspace = true
+thiserror.workspace         = true
+anyhow.workspace            = true
+tokio.workspace             = true
+tracing.workspace           = true
+clap.workspace              = true
+clap_complete.workspace     = true
+colored.workspace           = true
+comfy-table.workspace       = true
+indicatif.workspace         = true
+serde_json.workspace        = true
+chrono.workspace            = true

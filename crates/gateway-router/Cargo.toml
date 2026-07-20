@@ -1,0 +1,28 @@
+[package]
+name        = "gateway-router"
+description = "Route planner and connection manager for KSP Gateway"
+version.workspace    = true
+edition.workspace    = true
+license.workspace    = true
+authors.workspace    = true
+repository.workspace = true
+
+[dependencies]
+gateway-core.workspace     = true
+gateway-config.workspace   = true
+gateway-resolver.workspace = true
+async-trait.workspace      = true
+thiserror.workspace        = true
+tokio.workspace            = true
+tracing.workspace          = true
+hyper.workspace            = true
+hyper-util.workspace       = true
+http.workspace             = true
+http-body-util.workspace   = true
+rustls.workspace           = true
+rustls-native-certs.workspace = true
+tokio-rustls.workspace     = true
+dashmap.workspace          = true
+bytes.workspace            = true
+futures.workspace          = true
+pin-project.workspace      = true

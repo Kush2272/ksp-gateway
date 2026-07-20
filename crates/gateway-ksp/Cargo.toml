@@ -1,0 +1,28 @@
+[package]
+name        = "gateway-ksp"
+description = "KSP session listener, frame codecs, and session manager for KSP Gateway"
+version.workspace    = true
+edition.workspace    = true
+license.workspace    = true
+authors.workspace    = true
+repository.workspace = true
+
+[dependencies]
+gateway-core.workspace          = true
+gateway-plugin.workspace        = true
+gateway-pipeline-http.workspace = true
+gateway-pipeline-ws.workspace   = true
+gateway-config.workspace        = true
+async-trait.workspace           = true
+thiserror.workspace             = true
+tokio.workspace                 = true
+tokio-util.workspace            = true
+tracing.workspace               = true
+bytes.workspace                 = true
+futures.workspace               = true
+futures-util.workspace          = true
+dashmap.workspace               = true
+uuid.workspace                  = true
+ksp-server.workspace            = true
+ksp-client.workspace            = true
+chrono.workspace                = true

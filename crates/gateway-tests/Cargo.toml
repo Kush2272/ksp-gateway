@@ -1,0 +1,19 @@
+[package]
+name        = "gateway-tests"
+description = "Integration tests for KSP Gateway"
+version.workspace    = true
+edition.workspace    = true
+license.workspace    = true
+authors.workspace    = true
+repository.workspace = true
+
+[dev-dependencies]
+gateway-core.workspace          = true
+gateway-config.workspace        = true
+gateway-plugin.workspace        = true
+gateway-ksp.workspace           = true
+gateway-pipeline-http.workspace = true
+gateway-router.workspace        = true
+tokio.workspace                 = true
+tracing.workspace               = true
+tracing-subscriber.workspace    = true

@@ -1,0 +1,23 @@
+[package]
+name        = "gateway-dashboard"
+description = "Web dashboard for KSP Gateway (served at localhost:9090)"
+version.workspace    = true
+edition.workspace    = true
+license.workspace    = true
+authors.workspace    = true
+repository.workspace = true
+
+[dependencies]
+gateway-core.workspace    = true
+gateway-monitor.workspace = true
+gateway-config.workspace  = true
+gateway-ksp.workspace     = true
+thiserror.workspace       = true
+tokio.workspace           = true
+tracing.workspace         = true
+axum.workspace            = true
+tower.workspace           = true
+tower-http.workspace      = true
+serde.workspace           = true
+serde_json.workspace      = true
+chrono.workspace          = true

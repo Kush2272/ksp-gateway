@@ -1,0 +1,21 @@
+[package]
+name        = "gateway-monitor"
+description = "Prometheus metrics, structured tracing, and health checks for KSP Gateway"
+version.workspace    = true
+edition.workspace    = true
+license.workspace    = true
+authors.workspace    = true
+repository.workspace = true
+
+[dependencies]
+gateway-core.workspace   = true
+gateway-config.workspace = true
+thiserror.workspace      = true
+tokio.workspace          = true
+tracing.workspace        = true
+tracing-subscriber.workspace = true
+serde.workspace          = true
+serde_json.workspace     = true
+prometheus.workspace     = true
+once_cell.workspace      = true
+chrono.workspace         = true

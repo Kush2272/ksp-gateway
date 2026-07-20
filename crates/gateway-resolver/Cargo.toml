@@ -1,0 +1,18 @@
+[package]
+name        = "gateway-resolver"
+description = "DNS resolution with DoH and custom-hosts support for KSP Gateway"
+version.workspace    = true
+edition.workspace    = true
+license.workspace    = true
+authors.workspace    = true
+repository.workspace = true
+
+[dependencies]
+gateway-core.workspace   = true
+gateway-config.workspace = true
+async-trait.workspace    = true
+thiserror.workspace      = true
+tokio.workspace          = true
+tracing.workspace        = true
+hickory-resolver.workspace = true
+dashmap.workspace        = true
